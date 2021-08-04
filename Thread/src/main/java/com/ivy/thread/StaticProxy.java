@@ -20,7 +20,7 @@ public class StaticProxy {
 
 interface Marry{
     /**
-     * 人间四大喜事：S
+     * 人间四大喜事：
      *  1、久旱逢甘霖
      *  2、他乡遇故知
      *  3、洞房花烛夜

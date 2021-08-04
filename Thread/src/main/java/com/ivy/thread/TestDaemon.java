@@ -44,6 +44,7 @@ class God implements Runnable {
     @Override
     public void run() {
         while (true) {
+
             System.out.println("上帝守护着你...");
         }
     }
