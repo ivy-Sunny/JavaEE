@@ -8,10 +8,25 @@ package com.ivy.annotationandreflect.reflect;
  * @CreateTime: 2021-08-05
  */
 public class TestReflection {
+    public static void main(String[] args) throws ClassNotFoundException {
+        //通过反射获取类的Class对象
+        Class<?> c1 = Class.forName("com.ivy.annotationandreflect.reflect.User");
+        System.out.println(c1);
+        Class<?> c2 = Class.forName("com.ivy.annotationandreflect.reflect.User");
+        Class<?> c3 = Class.forName("com.ivy.annotationandreflect.reflect.User");
+        Class<?> c4 = Class.forName("com.ivy.annotationandreflect.reflect.User");
+
+        //一个类在内存中只有一个Class对象
+        //一个类被加载后，类的整个结构都会被封装到Class对象中
+        System.out.println(c2.hashCode());
+        System.out.println(c3.hashCode());
+        System.out.println(c4.hashCode());
+
+    }
 }
 
 /**
- * 实体类
+ * 实体类: pojo entity
  */
 class User {
     private String name;
