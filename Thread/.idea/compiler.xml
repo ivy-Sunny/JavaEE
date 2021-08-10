@@ -8,10 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JDBC" />
+        <module name="javaweb" />
         <module name="Thread" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="javaweb" target="1.7" />
       <module name="JDBC" target="1.8" />
       <module name="Thread" target="1.8" />
     </bytecodeTargetLevel>

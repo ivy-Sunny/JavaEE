@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../JDBC/JDBC.iml" filepath="$PROJECT_DIR$/../JDBC/JDBC.iml" />
       <module fileurl="file://$PROJECT_DIR$/Thread.iml" filepath="$PROJECT_DIR$/Thread.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../JavEE/javaweb/javaweb.iml" filepath="$PROJECT_DIR$/../../JavEE/javaweb/javaweb.iml" />
     </modules>
   </component>
 </project>
