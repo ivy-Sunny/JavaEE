@@ -23,12 +23,11 @@ public class UserDaoTest {
         //方式一：getMapper
         UserDao userDao = sqlSession.getMapper(UserDao.class);
         List<User> userList1 = userDao.getUserList( );
+        List<User> userList2 = userDao.getUserList();
         System.out.println(userList1);
+        System.out.println(userList2);
 
-        //方式二：
-        List<User> userList2 = sqlSession.selectList("com.ivy.dao.UserDao.getUserList");
-        System.out.println(userList2 );
-
+        System.out.println(userList1 == userList2);
         sqlSession.close();
     }
 }

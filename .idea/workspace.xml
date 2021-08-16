@@ -19,6 +19,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -31,6 +32,8 @@
       <updated>1627990829962</updated>
       <workItem from="1627990833572" duration="15000" />
       <workItem from="1628509541999" duration="23000" />
+      <workItem from="1629008284747" duration="259000" />
+      <workItem from="1629075589181" duration="58000" />
     </task>
     <servers />
   </component>

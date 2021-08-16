@@ -3,12 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.otg/dtd/mybatis-3-config.dtd">
 <configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3307/mybatis?useUnicode=true&amp;useSSL=false&amp;characterEncoding=utf-8"/>
+                <property name="url" value="jdbc:mysql://192.168.3.3:3307/jdbcstudy?useUnicode=true&amp;useSSL=false&amp;characterEncoding=utf-8"/>
                 <property name="username" value="root"/>
                 <property name="password" value="root"/>
             </dataSource>
