@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /ivySunny
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+  # 关闭模版引擎的缓存
+  thymeleaf:
+    cache: false
+  # 配置文件的真实位置
+  messages:
+    basename: i18n.login
