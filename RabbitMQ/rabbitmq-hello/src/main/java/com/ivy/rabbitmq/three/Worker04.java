@@ -28,6 +28,13 @@ public class Worker04 {
                          *    1、消息的标记
                          *    2、是否批量应答
                          */
+                        /**
+                         * 轮训       int prefetchCount = 0;  默认
+                         * 不公平分发  int prefetchCount = 1;
+                         * 预取值     int prefetchCount > 1;
+                         */
+                        int prefetchCount = 5;
+                        channel.basicQos(prefetchCount);
                         channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
                     }
                 },
