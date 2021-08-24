@@ -6,6 +6,8 @@ import com.rabbitmq.client.ConfirmCallback;
 
 import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ConfirmMessage {
 
@@ -18,8 +20,10 @@ public class ConfirmMessage {
      * 批量确认发布（出现问题时，确认不到对应消息）
      * 异步确认发布
      */
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException, InterruptedException {
+        //ConfirmMessage.publishMessageIndividually();//发布1000个单独发布确认消息，耗时1920ms
+        //ConfirmMessage.publishMessageBatch();//发布1000个批量发布确认消息，耗时132ms
+        ConfirmMessage.publishMessageAsync();//发布1000个异步发布确认消息，耗时53ms
     }
 
     /**
@@ -87,6 +91,9 @@ public class ConfirmMessage {
         /**
          * 消息确认成功 回调函数
          */
+        //开始时间
+        long starttime = System.currentTimeMillis();
+        AtomicReference<AtomicInteger> count = new AtomicReference<>(new AtomicInteger());
         ConfirmCallback ackCallback = (deliveryTag, multiple) -> {
             System.out.println("确认的消息:" + deliveryTag);
         };
@@ -98,6 +105,7 @@ public class ConfirmMessage {
          */
         ConfirmCallback nackCallback = (deliveryTag, multiple) -> {
             System.out.println("未确认的消息:" + deliveryTag);
+            count.get().getAndIncrement();
         };
         /**
          * 准备消息的监听器，监听哪些消息失败，哪些消息成功 (异步)
@@ -105,8 +113,6 @@ public class ConfirmMessage {
          * 多参 监听成功，失败消息
          */
         channel.addConfirmListener(ackCallback, nackCallback);
-        //开始时间
-        long starttime = System.currentTimeMillis();
         for (int i = 0; i < MESSAGE_COUNT; i++) {
             String message = "" + i;
             channel.basicPublish("", queueName, null, message.getBytes());
