@@ -6,6 +6,9 @@ import com.rabbitmq.client.ConfirmCallback;
 
 import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentNavigableMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -86,17 +89,35 @@ public class ConfirmMessage {
         //队列的声明
         String queueName = UUID.randomUUID().toString();
         channel.queueDeclare(queueName, false, false, false, null);
-        //开启发布确认
-        channel.confirmSelect();
+
+        /**
+         * 线程安全有序的一个哈希表 适用于高并发的情况下
+         *  1、将序号与消息进行关联
+         *  2、通过序号批量删除
+         *  3、支持高并发（多线程）
+         */
+        ConcurrentSkipListMap<Long, String> outstandingConfirms = new ConcurrentSkipListMap<>();
+
         /**
          * 消息确认成功 回调函数
          */
-        //开始时间
-        long starttime = System.currentTimeMillis();
-        AtomicReference<AtomicInteger> count = new AtomicReference<>(new AtomicInteger());
         ConfirmCallback ackCallback = (deliveryTag, multiple) -> {
             System.out.println("确认的消息:" + deliveryTag);
+            /**
+             * ------------
+             * 2、删除确认成功发布的消息
+             *
+             * 批量/单个
+             */
+            if (multiple) {
+                ConcurrentNavigableMap<Long, String> confirmed
+                        = outstandingConfirms.headMap(deliveryTag);
+                confirmed.clear();
+            } else {
+                outstandingConfirms.remove(deliveryTag);
+            }
         };
+
         /**
          * 消息确认失败 回调函数
          *  params:
@@ -104,9 +125,16 @@ public class ConfirmMessage {
          *      2.是否为批量确认
          */
         ConfirmCallback nackCallback = (deliveryTag, multiple) -> {
-            System.out.println("未确认的消息:" + deliveryTag);
-            count.get().getAndIncrement();
+            String message = outstandingConfirms.get(deliveryTag);
+            System.out.println("未确认的消息:" + message + " 标记是：" + deliveryTag);
         };
+
+        //开启发布确认
+        channel.confirmSelect();
+
+        //开始时间
+        long starttime = System.currentTimeMillis();
+
         /**
          * 准备消息的监听器，监听哪些消息失败，哪些消息成功 (异步)
          * 单参 监听成功消息
@@ -116,6 +144,11 @@ public class ConfirmMessage {
         for (int i = 0; i < MESSAGE_COUNT; i++) {
             String message = "" + i;
             channel.basicPublish("", queueName, null, message.getBytes());
+            /**
+             * ----------
+             * 1、记录下所有发送的消息
+             */
+            outstandingConfirms.put(channel.getNextPublishSeqNo(), message);
         }
 
         //结束时间
