@@ -30,9 +30,9 @@ eureka:
       defaultZone: http://localhost:7001/eureka/
   instance:
     # 修改 Status 信息
-    instance-id: springcloud-provider-dept8001
+    instance-id: springcloud-provider-dept:8001
 
 # actuator
-#info:
-#  app.name: ivySunny-springcloud
-#  company.name: ivy
+info:
+  app.name: ivySunny-springcloud
+  company.name: https://github.com/ivy-Sunny

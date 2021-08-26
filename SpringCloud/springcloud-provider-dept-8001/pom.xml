@@ -24,11 +24,11 @@
             <version>1.4.7.RELEASE</version>
         </dependency>
         <!--Eureka 监控组建,完善监控信息-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
-<!--            <version>2.1.4.RELEASE</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
         <!--我们需要拿到实体类，所以要配置api module-->
         <dependency>
             <groupId>com.ivy</groupId>
