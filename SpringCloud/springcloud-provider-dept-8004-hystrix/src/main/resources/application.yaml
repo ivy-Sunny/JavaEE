@@ -33,7 +33,7 @@ eureka:
       defaultZone: http://eureka7001.com:7001/eureka/, http://eureka7002.com:7002/eureka/, http://eureka7003.com:7003/eureka/
   instance:
     # 修改 Status 信息
-    instance-id: springcloud-provider-dept:8004
+    instance-id: springcloud-provider-dept-hystrix:8004
 
 # actuator
 info:
