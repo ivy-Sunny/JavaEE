@@ -18,6 +18,7 @@
         <module>springcloud-provider-dept-8003</module>
         <module>springcloud-feign</module>
         <module>springcloud-provider-dept-8004-hystrix</module>
+        <module>springcloud-dashboard</module>
     </modules>
 
     <!--打包方式    pom-->
