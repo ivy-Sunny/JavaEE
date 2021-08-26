@@ -14,7 +14,7 @@ import java.util.List;
  * value : 微服务的Application Name
  * 客户端（80端口）需要调用的 微服务
  */
-@FeignClient(value = "SPRINGCLOUD-PROVIDER-DEPT")
+@FeignClient(value = "SPRINGCLOUD-PROVIDER-DEPT", fallbackFactory = DeptClientServiceFallbaclFactory.class)
 public interface DeptClientService {
     @GetMapping("/dept/get/{id}")
     public Dept queryById(@PathVariable("id") int id);

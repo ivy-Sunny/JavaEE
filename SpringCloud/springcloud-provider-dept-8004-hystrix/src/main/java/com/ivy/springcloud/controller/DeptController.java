@@ -6,7 +6,10 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class DeptController {
@@ -22,6 +25,16 @@ public class DeptController {
             throw new RuntimeException("id => " + id + "，不存在该用户或者信息无法找到……");
         }
         return dept;
+    }
+
+    @PostMapping("/dept/add")
+    public boolean addDept(Dept dept) {
+        return deptService.addDept(dept);
+    }
+
+    @GetMapping("/dept/list")
+    public List<Dept> queryAll() {
+        return deptService.queryAll();
     }
 
     /**
