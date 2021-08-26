@@ -11,11 +11,6 @@
 
     <artifactId>springcloud-provider-dept-8001</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
     <dependencies>
         <!--Eureka 服务提供者-->
         <dependency>

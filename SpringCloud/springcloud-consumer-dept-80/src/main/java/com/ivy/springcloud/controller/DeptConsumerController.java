@@ -14,7 +14,12 @@ import java.util.List;
 @RestController
 public class DeptConsumerController {
 
-    private static final String REST_URL_PREFIX = "http://localhost:8001/";
+    /**
+     *  Ribbon 负载均衡后，接口不应该是固定ip
+     *  此时应该通过服务名来访问
+     */
+//    private static final String REST_URL_PREFIX = "http://localhost:8001/";
+    private static final String REST_URL_PREFIX = "http://SPRINGCLOUD-PROVIDER-DEPT/";
     /**
      * 消费者不应该有Service层
      * RestTmplate
