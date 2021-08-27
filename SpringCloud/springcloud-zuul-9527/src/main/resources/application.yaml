@@ -13,3 +13,13 @@ eureka:
     instance-id: zuul9527.com
     # 隐藏真实ip
     prefer-ip-address: true
+
+# Zuul
+zuul:
+  routes:
+    mydept.serverId: springcloud-provider-dept
+    mydept.path: /mydept/**
+  # 禁止使用该路径访问
+  ignored-services: springcloud-provider-dept
+  # 访问前缀
+  prefix: /ivysunny
