@@ -9,10 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springcloud-dashboard</artifactId>
+    <artifactId>springcloud-zuul-9527</artifactId>
 
     <!--实体类 + web -->
     <dependencies>
+        <!--Zuul-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zuul</artifactId>
+            <version>1.4.6.RELEASE</version>
+        </dependency>
         <!--Dashboard-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
